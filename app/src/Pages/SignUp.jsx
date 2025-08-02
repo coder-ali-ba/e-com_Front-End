@@ -3,18 +3,32 @@ import React from 'react'
 import { BaseUrl, endPoints } from '../constents.js'
 import { Controller, useForm } from 'react-hook-form'
 import { Button, Stack, TextField, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function SignUp() {
-   
+   const navigate =useNavigate()
     const {control , handleSubmit , reset}=useForm()
-     const signUp = async(obj) => {
-        const response =await axios.post(`${BaseUrl}${endPoints.signUp}` , obj)     
-        reset()       
-    }
+    const signUp = async(obj) => {
+      try {
+       
+          const response =await axios.post(`${BaseUrl}${endPoints.signUp}` , obj)
+          
+          alert(response.data.message)                  
+          reset({
+               fullName: "",
+               email: "",
+               password: "",
+               phoneNo: ""
+            });
+
+          navigate('/login')
+         } catch (error) {
+            alert(error.message)
+         }
+      }
   return (
     <div>
-      <Stack component='form' onSubmit={handleSubmit(signUp)} width={"400px"} margin={"auto"} padding={"20px"} border={"3px solid blue"}>
+      <Stack component='form' onSubmit={handleSubmit(signUp)} width={"400px"} margin={"auto"} padding={"20px"} border={"3px solid blue"} spacing={2}>
         <Typography variant='h4' textAlign={"center"}>SIGNUP</Typography>
         <Controller
             control={control}
@@ -22,6 +36,7 @@ function SignUp() {
             render={({field }) => (
               <TextField 
                label='FullName'
+               defaultValue=''
                type='text'              
                {...field}
                />
@@ -34,6 +49,7 @@ function SignUp() {
               <TextField 
                label='Email'
                type='email'
+               defaultValue=''
                {...field}
                />
             )}
@@ -45,6 +61,7 @@ function SignUp() {
               <TextField 
                label='Password'
                type='password'
+               defaultValue=''
                {...field}
                />
             )}
@@ -56,6 +73,7 @@ function SignUp() {
               <TextField 
                label='Contact'
                type='text'
+               defaultValue=''
                {...field}
                />
             )}
