@@ -4,6 +4,9 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { BaseUrl, endPoints } from '../constents.js'
+import Cookies from 'js-cookie'
+
+
 
 function Login() {
   const {control , handleSubmit , reset} =useForm()
@@ -15,10 +18,16 @@ function Login() {
       alert(response.data.message)
       
       const check=response.data.data.userType
+      console.log(response.data.token);
+
+      Cookies.set("token" , response.data.token)
+      
 
       if(check == "admin"){
+        localStorage.setItem("type" , "admin")
          navigate('/admin-dashboard')
       }else{
+        localStorage.setItem("type" , "user")
         navigate('/client-dashboard')
       }
       

@@ -1,11 +1,15 @@
 import { Box, Button, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Navbar from './Components/NavebarComp'
+import ImageSlider from './Components/Slider'
 
 function MainDashboard() {
   return (
     <div>
-      <Stack width={"100%"} maxWidth={"1024px"} direction={"row"} justifyContent={"space-between"} margin={"auto"} bgcolor={"GrayText"} padding={"10px"}>
+      <Navbar/>
+      <ImageSlider />
+      {/* <Stack width={"100%"} maxWidth={"1024px"} direction={"row"} justifyContent={"space-between"} margin={"auto"} bgcolor={"GrayText"} padding={"10px"}>
         <Box>
          <Typography variant="h4" color='white'>WelCome</Typography>
         </Box>
@@ -17,7 +21,7 @@ function MainDashboard() {
               variant='contained'><Link to="/login" style={{textDecoration:"none", color:"white"}}>LogIn</Link>
             </Button>
         </Box>
-      </Stack>
+      </Stack> */}
     </div>
   )
 }

@@ -5,23 +5,24 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#1a1a1a' }}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* Logo / Brand */}
+    
+    <AppBar position="static" sx={{ width:"100%", margin:"auto" , maxWidth:"1024px"}}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
+        
         <Typography variant="h6" component={Link} to="/" sx={{ color: '#fff', textDecoration: 'none' }}>
           MyStore
         </Typography>
 
-        {/* Navigation Links */}
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        
+        <Box sx={{ display: 'flex', gap: 2 , height:"70px", bgcolor:"primary.main"}}>
           <Button component={Link} to="/" sx={{ color: '#fff' }}>Home</Button>
           <Button component={Link} to="/shop" sx={{ color: '#fff' }}>Shop</Button>
           <Button component={Link} to="/about" sx={{ color: '#fff' }}>About</Button>
           <Button component={Link} to="/contact" sx={{ color: '#fff' }}>Contact</Button>
         </Box>
 
-        {/* Cart and Auth Buttons */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        
+        <Box sx={{ display: 'flex', height:"70px", alignItems: 'center', gap: 2, bgcolor:"primary.main"}}>
           <IconButton component={Link} to="/cart" sx={{ color: '#fff' }}>
             <Badge badgeContent={2} color="error">
               <ShoppingCartIcon />
@@ -33,6 +34,7 @@ const Navbar = () => {
         </Box>
       </Toolbar>
     </AppBar>
+    
   );
 };
 
