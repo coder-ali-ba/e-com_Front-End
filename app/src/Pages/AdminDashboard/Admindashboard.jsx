@@ -19,7 +19,7 @@ function Admindashboard() {
         {
           open && <AddItemModal close={handleClose}/>
         }
-        <ImageSlider />
+        
     </div>
   )
 }

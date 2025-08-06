@@ -16,9 +16,9 @@ const Navbar = () => {
         
         <Box sx={{ display: 'flex', gap: 2 , height:"70px", bgcolor:"primary.main"}}>
           <Button component={Link} to="/" sx={{ color: '#fff' }}>Home</Button>
-          <Button component={Link} to="/shop" sx={{ color: '#fff' }}>Shop</Button>
-          <Button component={Link} to="/about" sx={{ color: '#fff' }}>About</Button>
-          <Button component={Link} to="/contact" sx={{ color: '#fff' }}>Contact</Button>
+          <Button component={Link} to="/allitems" sx={{ color: '#fff' }}>AllItems</Button>
+          <Button component={Link} to="/allclients" sx={{ color: '#fff' }}>AllClients</Button>
+          <Button component={Link} to="/allorders" sx={{ color: '#fff' }}>AllOrders</Button>
         </Box>
 
         

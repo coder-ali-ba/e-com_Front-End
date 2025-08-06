@@ -6,13 +6,12 @@ import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
 import Admindashboard from './Pages/AdminDashboard/Admindashboard'
 import ClientDashboard from './Pages/ClientDashboard/ClientDashboard'
-
-import About from './Pages/About'
-import Contact from './Pages/Contact'
 import Cart from './Pages/Cart'
-import Shop from './Pages/Shop'
 import AuthRoutes from './Routes/AuthRoutes'
 import PrivateRoutes from './Routes/PrivateRoutes'
+import AllItems from './Pages/AllItems'
+import AllClients from './Pages/allclients'
+import AllOrders from './Pages/allorders'
 
 function App() {
   
@@ -31,9 +30,9 @@ function App() {
 
       <Route path='/client-dashboard' element={<ClientDashboard />}></Route>
       <Route element={<PrivateRoutes />}>
-        <Route path='/shop' element={<Shop/>}></Route> 
-        <Route path='/about' element={<About/>}></Route> 
-        <Route path='/contact' element={<Contact/>}></Route> 
+        <Route path='/allitems' element={<AllItems/>}></Route> 
+        <Route path='/allclients' element={<AllClients/>}></Route> 
+        <Route path='/allorders' element={<AllOrders/>}></Route> 
         <Route path='/cart' element={<Cart/>}></Route> 
       </Route>
 

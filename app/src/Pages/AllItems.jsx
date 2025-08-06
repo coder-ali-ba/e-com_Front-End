@@ -1,13 +1,15 @@
 import React from 'react'
 import Navbar from './Components/NavebarComp'
+import ImageSlider from './Components/Slider'
 
-function Contact() {
+function AllItems() {
   return (
     <div>
         <Navbar />
-      <h1>Contact</h1>
+        
+      <h1>All items</h1>
     </div>
   )
 }
 
-export default Contact
+export default AllItems

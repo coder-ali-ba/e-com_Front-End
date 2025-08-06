@@ -6,7 +6,13 @@ const endPoints = {
 
     //Items
     addItem : "/item/additem",
-    image : "/image/upload"
+    image : "/image/upload",
+
+
+    //users
+    getAllUsers : "/user/getallusers",
+    deleteUser : "/user/deluser",
+    update : "/user/updateuser"
 }
 
 export {

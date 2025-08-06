@@ -1,13 +1,13 @@
 import React from 'react'
 import Navbar from './Components/NavebarComp'
 
-function About() {
+function AllOrders() {
   return (
     <div>
         <Navbar />
-      <h1>About</h1>
+      <h1>AllOrders</h1>
     </div>
   )
 }
 
-export default About
+export default AllOrders
