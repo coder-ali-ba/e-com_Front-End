@@ -18,7 +18,7 @@ function Login() {
       alert(response.data.message)
       
       const check=response.data.data.userType
-      console.log(response.data.token);
+      
 
       Cookies.set("token" , response.data.token)
       
@@ -59,6 +59,7 @@ function Login() {
         <Controller
           control={control}
           name='password'
+          type="password"
           render={({field})=>(
             <TextField
             label='Password'
