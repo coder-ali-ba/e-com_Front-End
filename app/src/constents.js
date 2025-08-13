@@ -7,12 +7,16 @@ const endPoints = {
     //Items
     addItem : "/item/additem",
     image : "/image/upload",
-
+    getAllItems : "/item/getAllItems",
 
     //users
     getAllUsers : "/user/getallusers",
     deleteUser : "/user/deluser",
-    update : "/user/updateuser"
+    update : "/user/updateuser",
+
+
+    //public
+    
 }
 
 export {

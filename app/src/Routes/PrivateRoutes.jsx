@@ -6,7 +6,8 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 function PrivateRoutes() {
   const isLoggedIn = Cookies.get("token")
-  if(isLoggedIn){
+  const isAdmin = localStorage.getItem("type")
+  if(isLoggedIn && isAdmin === "admin"){
     return <Outlet/>
   }else{
     return <Navigate to='/' replace/>
