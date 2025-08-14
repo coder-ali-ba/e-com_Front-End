@@ -8,6 +8,7 @@ const endPoints = {
     addItem : "/item/additem",
     image : "/image/upload",
     getAllItems : "/item/getAllItems",
+    changeStatus : "/item/changestatus",
 
     //users
     getAllUsers : "/user/getallusers",
