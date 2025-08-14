@@ -5,10 +5,23 @@ import axios from 'axios'
 import { BaseUrl, endPoints } from '../constents.js'
 import { Button, Card, CardActions, CardContent, CardMedia, Stack, Typography } from '@mui/material'
 import Cookies from 'js-cookie'
+import UpdateItemModal from './Components/UpdateItemModal'
+
 
 
 
 function AllItems() {
+  const [openUpdate , setOpenUpdate] = useState(false)
+  const [selectedItem , setSelectedItem] = useState(null)
+  const handleOpen = (item)=>{
+    setSelectedItem(item)
+    setOpenUpdate(true)
+  }
+  const handleClose = ()=>{
+    setSelectedItem(null)
+    setOpenUpdate(false)
+  }
+  
   const [items , setItems] = useState([])
   useEffect(()=>{
     getItems()
@@ -19,26 +32,28 @@ function AllItems() {
   }
 
   const toggleStatus = async(id) => {
-     console.log(id);
+    
      const response = await axios.patch(`${BaseUrl}${endPoints.changeStatus}/${id}`,{},{
       headers : {
         Authorization : `Bearer ${Cookies.get("token")}`
       }
      })  
-     console.log(response);
+     alert(response.data.message)
+     getItems()
         
   }
 
-  // const delItem    = async(id) => {
-  //      console.log(id);
+  const deleteItem = async(id) => {
        
-  // } 
-  // const updateItem = async(id) => {
-  //      console.log(id);
-       
-  // } 
-  
-  
+       const response = await axios.deleteb(`${BaseUrl}${endPoints.deleteItem}/${id}`,{},{
+        headers : {
+          Authorization : `Bearer ${Cookies.get("token")}`
+        }
+       })  
+       alert(response.data.message)
+       getItems()
+  } 
+    
   return (
     <div>
         <Navbar /> 
@@ -67,21 +82,22 @@ function AllItems() {
                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                      <strong>Price</strong> {item.itemPrice}
                    </Typography>
-                   <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                     <strong>Is Available</strong> {item.isAvailable}
-                   </Typography>
                  </CardContent>
                  <CardActions>
-                   <Button variant='contained' size="small">update</Button>
-                   <Button variant='contained' size="small" sx={{bgcolor:"orange"}} onClick={()=>toggleStatus(item._id)}>toggle</Button>
-                   <Button variant='contained' size="small" sx={{bgcolor:"red"}}>delete</Button>
+                   <Button variant='contained' size="small" onClick={()=>handleOpen(item)}>update</Button>
+                   <Button variant='contained' size="small" sx={{bgcolor:"orange"}} onClick={()=>toggleStatus(item._id)}>{item.isAvailable ? "Available" : "Not Available"}</Button>
+                   <Button variant='contained' size="small" sx={{bgcolor:"red"}} onClick={()=>deleteItem(item._id)}>delete</Button>
                  </CardActions>
+                 
                </Card>
             ))
           }
+          
           </Stack>
         </Stack>       
+        { openUpdate && <UpdateItemModal close={handleClose} item = {selectedItem}/>  }
     </div>
+    
   )
 }
 
