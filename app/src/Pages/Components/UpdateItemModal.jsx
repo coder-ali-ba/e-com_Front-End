@@ -1,6 +1,26 @@
-import { Box, Button, Modal, Stack, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+// import React from 'react'
+
+// function UpdateItemModal({itemId}) {
+//   return (
+//     <div>
+//       <h1>UpDate Modellklklk : {itemId}</h1>
+//     </div>
+//   )
+// }
+
+// export default UpdateItemModal
+
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import { Controller, useForm } from 'react-hook-form';
+import { Stack, TextField } from '@mui/material';
+import axios from 'axios';
+import { BaseUrl, endPoints } from '../../constents';
+import Cookies from 'js-cookie';
+import { BorderOuterRounded } from '@mui/icons-material';
 
 
 
@@ -14,20 +34,48 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-function UpdateItemModal({close}) {
-    const{handleSubmit , control , reset}=useForm()
-    const [image , setImage] = useState()
 
+export default function UpdateItemModal({itemId , closeUpdate}) {
+    const{control , handleSubmit , reset}=useForm()
+    const [image , setImage] = React.useState()
+  
 
-    const handleImageChange = (event) =>{
-      setImage(event.target.files[0]);
+    const handleImageChange = (event) => {
+       setImage(event.target.files[0])
     }
+     
+
+   
     
-    const onSubmit = async(itemDatas) => {
-        console.log(itemDatas);
-        console.log(image);
-        
-        
+    const onSubmit = async(obj) => {
+       
+       const formData = new FormData()
+       formData.append("image" , image)
+
+       const uploadImage = await axios.post(`${BaseUrl}${endPoints.image}`, formData ,{
+        headers : {
+          Authorization : `Bearer ${Cookies.get("token")}`,
+          'Content-Type': 'multipart/form-data'
+        }
+       })
+      
+          
+       
+
+         const objtoSend = {
+          ...obj,
+          image : uploadImage.data.url
+         }
+       
+      const response = await axios.post(`${BaseUrl}${endPoints.addItem}`, objtoSend , {
+        headers : {
+          Authorization : `Bearer ${Cookies.get("token")}`
+        }
+      })  
+      
+     alert(response.data.message)
+      
+     close()
     }
 
   return (
@@ -35,7 +83,7 @@ function UpdateItemModal({close}) {
       
       <Modal
         
-        onClose={close}
+        onClose={closeUpdate}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         
@@ -107,12 +155,11 @@ function UpdateItemModal({close}) {
             />
          </Button>
          <Box>
-          <Button variant='contained' fullWidth type='submit'>Add</Button>
+          <Button variant='contained' fullWidth type='submit'>Update</Button>
          </Box>
         </Stack>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default UpdateItemModal
