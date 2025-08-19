@@ -70,7 +70,7 @@ function AllItems() {
                    image={item.image}
                  />
                  <CardContent>
-                  { openUpdate && <UpdateItemModal itemId={selectedId} closeUpdate={close}/>  }
+                  { openUpdate && <UpdateItemModal itemId={selectedId} handleClose={close} allItem = {getItems}/>  }
 
                    <Typography gutterBottom variant="h5" component="div">
                     Item Name <strong>{item.itemName}</strong> 

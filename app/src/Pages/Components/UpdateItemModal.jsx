@@ -1,27 +1,9 @@
-// import React from 'react'
-
-// function UpdateItemModal({itemId}) {
-//   return (
-//     <div>
-//       <h1>UpDate Modellklklk : {itemId}</h1>
-//     </div>
-//   )
-// }
-
-// export default UpdateItemModal
-
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { Controller, useForm } from 'react-hook-form';
-import { Stack, TextField } from '@mui/material';
-import axios from 'axios';
-import { BaseUrl, endPoints } from '../../constents';
-import Cookies from 'js-cookie';
-import { BorderOuterRounded } from '@mui/icons-material';
-
+import { Box, Button, Modal, Stack, TextField, Typography } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { BaseUrl, endPoints } from "../../constents";
+import Cookies from "js-cookie";
 
 
 const style = {
@@ -31,65 +13,54 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
+const UpdateItemModal = ({handleClose , itemId , allItem}) => {
+  const {handleSubmit , control , reset } = useForm()
+  const [imageURL , setImageURL] = useState()
 
-export default function UpdateItemModal({itemId , closeUpdate}) {
-    const{control , handleSubmit , reset}=useForm()
-    const [image , setImage] = React.useState()
-  
+  const handleImageChange = (event) =>{
+   setImageURL(event.target.files[0])
+  }
 
-    const handleImageChange = (event) => {
-       setImage(event.target.files[0])
-    }
-     
 
-   
-    
-    const onSubmit = async(obj) => {
-       
-       const formData = new FormData()
-       formData.append("image" , image)
+  const onSubmit = async(obj) => {
+      const formData = new FormData()
+      formData.append("image" , imageURL)
 
-       const uploadImage = await axios.post(`${BaseUrl}${endPoints.image}`, formData ,{
+      const pic = await axios.post(`${BaseUrl}${endPoints.image}` , formData , {
         headers : {
           Authorization : `Bearer ${Cookies.get("token")}`,
-          'Content-Type': 'multipart/form-data'
+          "Content-Type" : "multipart/form-data"
         }
-       })
+      })
       
-          
+       const updatedObj = {
+        ...obj,
+        image : pic.data.url
+       }  
        
-
-         const objtoSend = {
-          ...obj,
-          image : uploadImage.data.url
-         }
-       
-      const response = await axios.post(`${BaseUrl}${endPoints.addItem}`, objtoSend , {
+       const response = await axios.put(`${BaseUrl}${endPoints.updateItem}/${itemId}` , updatedObj , {
         headers : {
           Authorization : `Bearer ${Cookies.get("token")}`
         }
-      })  
-      
-     alert(response.data.message)
-      
-     close()
-    }
-
-  return (
-    <div>
-      
-      <Modal
-        
-        onClose={closeUpdate}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        
-      >
-        <Stack sx={style} component="form" onSubmit={handleSubmit(onSubmit)} textAlign={"center"} spacing={2}>
-            <Typography variant='h5'>Update Item</Typography>
+       })
+       
+       alert("Updated Item Successfully")
+       handleClose()
+       allItem()
+  }
+return (
+  <Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+  <Stack sx={style} component="form" onSubmit={handleSubmit(onSubmit)} textAlign={"center"} spacing={2}>
+            <Typography variant='h5'>Add Item</Typography>
           <Controller
            control={control}
            name='itemName'
@@ -155,11 +126,16 @@ export default function UpdateItemModal({itemId , closeUpdate}) {
             />
          </Button>
          <Box>
-          <Button variant='contained' fullWidth type='submit'>Update</Button>
+          <Button variant='contained' fullWidth type='submit'>Add</Button>
          </Box>
         </Stack>
-      </Modal>
-    </div>
-  );
+</Modal>
+)
 }
+
+export default UpdateItemModal
+
+
+
+
 

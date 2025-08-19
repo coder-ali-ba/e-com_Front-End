@@ -29,8 +29,11 @@ function App() {
       <Route path='/admin-dashboard' element={<Admindashboard />}></Route>
 
       <Route path='/client-dashboard' element={<ClientDashboard />}></Route>
+      <Route path='/allitems' element={<AllItems/>}></Route> 
+
+      
       <Route element={<PrivateRoutes />}>
-        <Route path='/allitems' element={<AllItems/>}></Route> 
+        
         <Route path='/allclients' element={<AllClients/>}></Route> 
         <Route path='/allorders' element={<AllOrders/>}></Route> 
         <Route path='/cart' element={<Cart/>}></Route> 
