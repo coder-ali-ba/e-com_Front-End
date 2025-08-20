@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from './Components/NavebarComp'
-import ImageSlider from './Components/Slider'
+import Navbar from '../Components/NavebarComp.jsx'
+import ImageSlider from '../Components/Slider.jsx'
 import axios from 'axios'
-import { BaseUrl, endPoints } from '../constents.js'
+import { BaseUrl, endPoints } from '../../constents.js'
 import { Button, Card, CardActions, CardContent, CardMedia, Stack, Typography } from '@mui/material'
 import Cookies from 'js-cookie'
-import UpdateModal from "./Components/UpdateItemModal"
-import UpdateItemModal from './Components/UpdateItemModal'
+import UpdateModal from "../Components/UpdateItemModal.jsx"
+import UpdateItemModal from '../Components/UpdateItemModal.jsx'
 
 
 

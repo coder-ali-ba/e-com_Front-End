@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from './Components/NavebarComp'
+import Navbar from '../Components/NavebarComp.jsx'
 import axios from 'axios'
-import { BaseUrl, endPoints } from '../constents.js'
+import { BaseUrl, endPoints } from '../../constents.js'
 import Cookies from 'js-cookie'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';

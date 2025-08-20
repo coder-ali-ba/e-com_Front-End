@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './Components/NavebarComp'
+import Navbar from '../Components/NavebarComp'
 
 function AllOrders() {
   return (
