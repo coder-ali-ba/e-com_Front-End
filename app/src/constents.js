@@ -11,6 +11,7 @@ const endPoints = {
     changeStatus : "/item/changestatus",
     deleteItem : "/item/deleteitem",
     updateItem : "/item/updateitem",
+    getVarItems : "/item/getvaritems",
     //users
     getAllUsers : "/user/getallusers",
     deleteUser : "/user/deluser",
